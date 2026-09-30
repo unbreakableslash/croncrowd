@@ -4,7 +4,7 @@ CronCrowd is a forward-looking capacity simulation, not a scheduler or a product
 
 ## Matching
 
-Five fields are minute (0�C59), hour (0�C23), day of month (1�C31), month (1�C12), and day of week (0�C7; 0 and 7 both mean Sunday). Lists, non-wrapping ranges, and steps are accepted. Month and weekday fields accept three-letter names, case-insensitively. A value with a step, such as `10/20`, spans from that value to the end of its field.
+Five fields are minute (0–59), hour (0–23), day of month (1–31), month (1–12), and day of week (0–7; 0 and 7 both mean Sunday). Lists, non-wrapping ranges, and steps are accepted. Month and weekday fields accept three-letter names, case-insensitively. A value with a step, such as `10/20`, spans from that value to the end of its field.
 
 `*/n` steps reset inside their field. For example, `*/40 * * * *` means minutes 0 and 40 of each hour, with a 20-minute gap across the hour boundary; it is not an elapsed interval of 40 minutes.
 
@@ -32,9 +32,9 @@ Weights must share a meaningful unit. The model has no resource feedback, queue,
 
 ## Limits
 
-- 1�C100 jobs, 1�C31 whole days per simulation.
-- Durations: 1�C1440 whole minutes; launch delays: 0�C1440 whole minutes.
-- Weights: 0.1�C1000; capacity: 0.1�C100000, both may be fractional.
+- 1–100 jobs, 1–31 whole days per simulation.
+- Durations: 1–1440 whole minutes; launch delays: 0–1440 whole minutes.
+- Weights: 0.1–1000; capacity: 0.1–100000, both may be fractional.
 - At most 200000 run intervals intersecting the window, including carry-in.
 - Imported JSON files are limited to 1 MB by the CLI and UI.
 - Start timestamps need an explicit offset; the start is rounded upward to the next minute.

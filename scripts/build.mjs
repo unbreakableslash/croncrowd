@@ -6,4 +6,4 @@ const target = new URL('web/index.html', root);
 if (process.argv.includes('--check')) {
   if (await readFile(target, 'utf8') !== html) throw new Error('web/index.html is stale. Run node scripts/build.mjs.');
   process.stdout.write('Standalone browser build is current.\n');
-} else { await writeFile(target, html, 'utf8'); process.stdout.write('Built web/index.html �� no external assets.\n'); }
+} else { await writeFile(target, html, 'utf8'); process.stdout.write('Built web/index.html — no external assets.\n'); }

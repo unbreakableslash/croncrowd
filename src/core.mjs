@@ -9,7 +9,7 @@ const SPECS = [[0, 59], [0, 23], [1, 31], [1, 12, MONTHS], [0, 7, DAYS]];
 function number(text, min, max, names) {
   const named = names?.indexOf(text.toUpperCase());
   const value = named >= 0 ? named + (names === MONTHS ? 1 : 0) : /^\d+$/.test(text) ? Number(text) : NaN;
-  if (!Number.isInteger(value) || value < min || value > max) throw new Error(`Value "${text}" must be ${min}�C${max}${names ? ' or a three-letter name' : ''}.`);
+  if (!Number.isInteger(value) || value < min || value > max) throw new Error(`Value "${text}" must be ${min}–${max}${names ? ' or a three-letter name' : ''}.`);
   return value;
 }
 
@@ -71,7 +71,7 @@ function bounded(value, label, min, max, integer = true) {
 }
 
 export function normalizeConfig(config) {
-  if (!config || !Array.isArray(config.jobs) || config.jobs.length < 1 || config.jobs.length > 100) throw new Error('Config needs 1�C100 jobs.');
+  if (!config || !Array.isArray(config.jobs) || config.jobs.length < 1 || config.jobs.length > 100) throw new Error('Config needs 1–100 jobs.');
   const ids = new Set();
   const jobs = config.jobs.map((job, index) => {
     if (!job || typeof job !== 'object') throw new Error(`Job ${index + 1} must be an object.`);
@@ -79,7 +79,7 @@ export function normalizeConfig(config) {
     if (typeof id !== 'string' || !id.trim() || ids.has(id)) throw new Error('Job IDs must be unique non-empty strings.');
     ids.add(id);
     const name = job.name ?? id;
-    if (typeof name !== 'string' || !name.trim() || name.length > 200 || /[|\r\n]/.test(name)) throw new Error(`Job ${index + 1} needs a name of 1�C200 characters without pipes or newlines.`);
+    if (typeof name !== 'string' || !name.trim() || name.length > 200 || /[|\r\n]/.test(name)) throw new Error(`Job ${index + 1} needs a name of 1–200 characters without pipes or newlines.`);
     parseCron(job.cron);
     const timezone = job.timezone ?? config.timezone ?? 'UTC';
     if (typeof timezone !== 'string') throw new Error('Timezone must be a string.');

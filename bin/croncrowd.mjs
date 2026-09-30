@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import { DEMO_CONFIG, simulate, serializableReport } from '../src/core.mjs';
 import { makeHtml } from '../src/html.mjs';
 
-const HELP = `CronCrowd �� see when cron jobs overlap
+const HELP = `CronCrowd — see when cron jobs overlap
 
   croncrowd demo [--port 4173]
   croncrowd audit jobs.json [--from ISO] [--days 7] [--capacity 4]
@@ -13,7 +13,7 @@ const HELP = `CronCrowd �� see when cron jobs overlap
 Requires Node.js 20+. No dependencies, network calls, or job execution.
 Audit models minute-resolution starts, fixed durations, and resource weights.
 Window includes its first minute and excludes its final minute.
-ISO timestamps must include Z or a UTC offset. days: 1�C31.
+ISO timestamps must include Z or a UTC offset. days: 1–31.
 Exit codes: 0 success, 1 overload with --fail-on-overload, 2 invalid input/I/O.
 Use --html to produce a standalone interactive report. Open it offline.
 `;
@@ -43,7 +43,7 @@ try {
   else if (command === 'demo') {
     if (positional.length !== 1 || Object.keys(flags).some(k => k !== 'port')) throw new Error('demo accepts only --port.');
     const port = Number(flags.port ?? 4173);
-    if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error('port must be 1024�C65535.');
+    if (!Number.isInteger(port) || port < 1024 || port > 65535) throw new Error('port must be 1024–65535.');
     const html = await makeHtml(DEMO_CONFIG);
     const server = createServer((req, res) => {
       if (req.url !== '/' && req.url !== '/index.html') { res.writeHead(404); res.end('Not found'); return; }
@@ -67,7 +67,7 @@ try {
     if (flags.json) process.stdout.write(JSON.stringify(serializableReport(result), null, 2) + '\n');
     else {
       const s = result.summary;
-      process.stdout.write(`CronCrowd\n${result.window.from} �� ${result.window.to}\n\n${result.jobs.length} jobs �� ${s.starts} starts �� ${s.carriedIn} carried-in runs\nPeak load ${s.peakLoad.toFixed(2)} / capacity ${result.config.capacity} at ${s.peakAt}\n${s.overloadMinutes} overloaded minutes �� ${result.overloads.length} overload windows\n\n`);
+      process.stdout.write(`CronCrowd\n${result.window.from} → ${result.window.to}\n\n${result.jobs.length} jobs · ${s.starts} starts · ${s.carriedIn} carried-in runs\nPeak load ${s.peakLoad.toFixed(2)} / capacity ${result.config.capacity} at ${s.peakAt}\n${s.overloadMinutes} overloaded minutes · ${result.overloads.length} overload windows\n\n`);
       for (const job of result.jobs) process.stdout.write(`${job.name}: ${job.count} starts, ${job.durationMinutes}m duration, ${job.weight} units, ${job.delayMinutes}m delay (${job.timezone})\n`);
       for (const warning of result.warnings) process.stdout.write(`NOTE: ${warning.message}\n`);
     }

@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="See when your cron jobs overlap. Offline capacity planning with durations, time zones, and what-if delays.">
-  <title>CronCrowd �� see when jobs overlap</title>
+  <title>CronCrowd — see when jobs overlap</title>
   <style>/* STYLE */</style>
 </head>
 <body>
   <header>
-    <a class="brand" href="#"><span class="brand-icon" aria-hidden="true">?</span> CronCrowd<span class="version">0.1</span></a>
-    <div class="header-actions"><span class="local"><span></span> LOCAL �� NO UPLOADS</span><button id="lang" class="quiet">����</button><a href="https://github.com/unbreakableslash/croncrowd" target="_blank" rel="noopener noreferrer">GitHub �J</a></div>
+    <a class="brand" href="#"><span class="brand-icon" aria-hidden="true">▥</span> CronCrowd<span class="version">0.1</span></a>
+    <div class="header-actions"><span class="local"><span></span> LOCAL · NO UPLOADS</span><button id="lang" class="quiet">中文</button><a href="https://github.com/unbreakableslash/croncrowd" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </header>
   <main>
     <section class="intro"><div><p class="eyebrow" data-i18n="eyebrow">SCHEDULE CAPACITY LAB</p><h1 data-i18n="title">Your busiest minute,<br>before it happens.</h1><p class="lead" data-i18n="lead">Add run durations to your cron schedules. See overlaps, measure capacity, and try a quieter start.</p></div><div class="intro-stamp"><span>01</span><p data-i18n="stamp">MODEL THE LOAD.<br>MOVE THE PEAK.</p></div></section>
@@ -21,21 +21,21 @@
         <label for="editor" class="sr-only" data-i18n="editorLabel">Job definitions</label><textarea id="editor" spellcheck="false" autocomplete="off"></textarea>
         <div class="controls"><label><span data-i18n="capacity">Capacity units</span><input id="capacity" type="number" min="0.1" max="100000" step="0.1" value="4"></label><label><span data-i18n="window">Window</span><select id="days"><option value="1">1 day</option><option value="7" selected>7 days</option><option value="14">14 days</option><option value="31">31 days</option></select></label></div>
         <label class="date-control"><span data-i18n="from">Start (UTC)</span><input id="from" type="datetime-local" step="60"></label>
-        <button id="analyze" class="primary" data-i18n="analyze">Analyze schedules ��</button>
+        <button id="analyze" class="primary" data-i18n="analyze">Analyze schedules →</button>
         <p id="error" role="alert" class="error" hidden></p>
         <div class="model-note"><span class="note-icon">i</span><p data-i18n="model">A planning model: fixed durations, unlimited parallel starts, no queue. All charts use UTC. No tasks are executed.</p></div>
         <div class="export-row"><button id="config-export" data-i18n="exportConfig">Export JSON</button><button id="html-export" data-i18n="exportHtml">Save offline report</button></div>
-        <label class="import-button" for="import" data-i18n="import">Import a JSON config �J</label><input id="import" class="sr-only" type="file" accept=".json,application/json">
+        <label class="import-button" for="import" data-i18n="import">Import a JSON config ↗</label><input id="import" class="sr-only" type="file" accept=".json,application/json">
       </aside>
       <section class="results" aria-label="Simulation results">
         <div class="stats" id="stats" aria-live="polite"></div>
-        <div class="panel chart-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="loadLabel">02 / LOAD MAP</p><h2 data-i18n="loadTitle">A week at a glance</h2></div><span class="tag">UTC</span></div><p class="hint" data-i18n="heatHint">Each square is one hour. Color shows its highest load. Select a day for the timeline.</p><div id="heatmap" class="heatmap"></div><div class="legend"><span><i class="key low"></i><span data-i18n="low">Within capacity</span></span><span><i class="key high"></i><span data-i18n="high">Over capacity</span></span><span data-i18n="hourMax">Hourly peak �� not hourly average</span></div></div>
+        <div class="panel chart-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="loadLabel">02 / LOAD MAP</p><h2 data-i18n="loadTitle">A week at a glance</h2></div><span class="tag">UTC</span></div><p class="hint" data-i18n="heatHint">Each square is one hour. Color shows its highest load. Select a day for the timeline.</p><div id="heatmap" class="heatmap"></div><div class="legend"><span><i class="key low"></i><span data-i18n="low">Within capacity</span></span><span><i class="key high"></i><span data-i18n="high">Over capacity</span></span><span data-i18n="hourMax">Hourly peak · not hourly average</span></div></div>
         <div class="panel timeline-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="timelineLabel">03 / RUN TIMELINE</p><h2 id="timeline-title">Run timeline</h2></div><span class="tag" id="selected-day"></span></div><div class="timeline-scroll"><div id="timeline"></div></div></div>
         <div class="panel whatif-panel"><div class="panel-heading"><div><p class="eyebrow" data-i18n="whatifLabel">04 / WHAT IF</p><h2 data-i18n="whatif">Give one job more breathing room</h2></div><span class="tag accent" data-i18n="preview">PREVIEW</span></div><div class="whatif-controls"><label><span data-i18n="job">Job</span><select id="whatif-job"></select></label><label><span data-i18n="delay">Launch delay (min)</span><input id="delay" type="range" min="0" max="120" step="1" value="0"><output id="delay-value">0m</output></label><button id="preview-button" data-i18n="compare">Compare</button></div><p class="hint" data-i18n="delayNote">Delay shifts each modeled launch. It does not rewrite cron or change your scheduler.</p><div id="comparison" aria-live="polite"></div><button id="apply" class="quiet" hidden data-i18n="apply">Keep this delay in the model</button></div>
         <details class="panel details"><summary data-i18n="assumptions">Model assumptions & schedule notes</summary><p data-i18n="assumptionText">Five-field cron with Vixie day-of-month/weekday rules. DST gaps skip starts; repeated wall minutes match twice. Scheduler policies may differ. Overload means modeled resource demand exceeds capacity, not a measured production incident. Work already running at the start is included.</p><div id="warnings"></div></details>
       </section>
     </div>
-    <footer><span data-i18n="footer">Built for calmer cron schedules. Zero dependencies. Your config stays on this device.</span><span>MIT �� CronCrowd</span></footer>
+    <footer><span data-i18n="footer">Built for calmer cron schedules. Zero dependencies. Your config stays on this device.</span><span>MIT · CronCrowd</span></footer>
   </main>
   <script id="seed" type="application/json">{}</script>
   <script>/* CORE */

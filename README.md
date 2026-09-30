@@ -1,10 +1,10 @@
 # CronCrowd
 
-**See when your cron jobs overlap �� including the work between starts.**
+**See when your cron jobs overlap — including the work between starts.**
 
 Offline capacity planning for scheduled jobs. Add expected durations and resource weights, inspect a shared timeline, and compare a launch delay before changing your scheduler.
 
-[��������](README.zh-CN.md) �� [Model & cron semantics](docs/model.md) �� [Contributing](CONTRIBUTING.md)
+[简体中文](README.zh-CN.md) · [Model & cron semantics](docs/model.md) · [Contributing](CONTRIBUTING.md)
 
 ![CronCrowd heatmap, run timeline, and delay simulator](docs/demo.jpg)
 
@@ -37,7 +37,7 @@ For the bundled seven-day example starting September 30, 2026, moving **Analytic
 - **Carry-in work:** jobs launched before the window still contribute if they are running inside it.
 - **Offline HTML reports:** save an interactive report with your configuration embedded; open it on another device without a server.
 - **CLI and CI:** text or JSON results, a reproducible timestamp, and an optional failure code when demand exceeds capacity.
-- **English / �������� UI.** Zero runtime dependencies and no telemetry.
+- **English / 简体中文 UI.** Zero runtime dependencies and no telemetry.
 
 ## Define your jobs
 
@@ -86,7 +86,7 @@ Optionally run `npm install --global .` in the checkout to make `croncrowd` avai
 | Option | Behavior |
 | --- | --- |
 | `--from ISO` | Start, including `Z` or an explicit UTC offset; rounds upward to the next minute |
-| `--days N` | 1�C31 days, default 7 |
+| `--days N` | 1–31 days, default 7 |
 | `--capacity N` | Override configuration capacity |
 | `--json` | JSON on stdout; status about HTML output goes to stderr |
 | `--html FILE` | Write a standalone interactive report with the same config and window |
