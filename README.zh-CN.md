@@ -4,7 +4,7 @@
 
 为 cron 任务加上预计时长和资源权重，查看共同时间线，再模拟启动延迟对容量的影响。完全本地运行，零依赖，无需账号或 API Key。
 
-[English](README.md) · [模型说明](docs/model.md)
+[**在线试用**](https://unbreakableslash.github.io/croncrowd/) · [English](README.md) · [模型说明](docs/model.md)
 
 ![CronCrowd 实际界面：热力图、任务时间线和延迟模拟](docs/demo.jpg)
 

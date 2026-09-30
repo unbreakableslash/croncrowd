@@ -4,7 +4,7 @@
 
 Offline capacity planning for scheduled jobs. Add expected durations and resource weights, inspect a shared timeline, and compare a launch delay before changing your scheduler.
 
-[简体中文](README.zh-CN.md) · [Model & cron semantics](docs/model.md) · [Contributing](CONTRIBUTING.md)
+[**Live demo — try it now**](https://unbreakableslash.github.io/croncrowd/) · [简体中文](README.zh-CN.md) · [Model & cron semantics](docs/model.md) · [Contributing](CONTRIBUTING.md)
 
 ![CronCrowd heatmap, run timeline, and delay simulator](docs/demo.jpg)
 
