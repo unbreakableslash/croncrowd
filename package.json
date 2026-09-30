@@ -1,0 +1,20 @@
+{
+  "name": "@unbreakableslash/croncrowd",
+  "version": "0.1.0",
+  "description": "See when cron jobs overlap. Offline capacity planning with duration-aware timelines and what-if delays.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "bin": { "croncrowd": "bin/croncrowd.mjs" },
+  "exports": "./src/core.mjs",
+  "files": ["bin", "src", "web", "docs", "examples", "LICENSE", "README.md", "README.zh-CN.md"],
+  "scripts": {
+    "test": "node --test",
+    "build": "node scripts/build.mjs",
+    "demo": "node scripts/serve.mjs",
+    "check": "node --check src/core.mjs && node --check bin/croncrowd.mjs && node --check web/app.js && node --test && node scripts/build.mjs --check"
+  },
+  "keywords": ["cron", "capacity-planning", "visualization", "devtools", "offline", "scheduling"],
+  "repository": { "type": "git", "url": "https://github.com/unbreakableslash/croncrowd.git" },
+  "bugs": "https://github.com/unbreakableslash/croncrowd/issues"
+}
